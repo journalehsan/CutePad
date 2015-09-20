@@ -4,7 +4,8 @@
 #include <QtCore/QDebug>
 #include <QtGui/QIcon>
 #include <QtCore/QObject>
-//--------------------------------------------
+#include "actions.h"
+#include "main_menu.h"
 class MainWin : public QMainWindow
 {
     Q_OBJECT
@@ -24,7 +25,8 @@ private:
     QAction *actionQuitApp;
     QAction *actionCloseFile;
 private slots:
-
+     void slotNewFile();
+     void slotOpenFile();
+     void slotSaveFile();
 };
-
 #endif //MAIN_WIN_H

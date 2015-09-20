@@ -1,6 +1,10 @@
 ﻿#include "main_win.h"
-#include "actions.h"
-#include "main_menu.h"
+//Define Actions ad a instance
+Actions *actionsInstance;
+//Global Variables
+QString strFileName; //for title anme
+QString urlGlobalFilePath;
+//
 MainWin::MainWin(QMainWindow *parent)
 : QMainWindow(parent){
     //setup windows widget
@@ -41,8 +45,56 @@ MainWin::MainWin(QMainWindow *parent)
     mainToolBar->addAction(actionOpenFile);
     mainToolBar->addAction(actionSaveFile);
     this->addToolBar(mainToolBar);
+    //Tabs
+    this->setDocumentMode(true);
+    //connect actions to Actios Class's Functions
+    QObject::connect(actionNewFile, SIGNAL(triggered(bool)), this, SLOT(slotNewFile()));
+    QObject::connect(actionOpenFile, SIGNAL(triggered(bool)), this, SLOT(slotOpenFile()));
+    QObject::connect(actionSaveFile, SIGNAL(triggered(bool)), this, SLOT(slotSaveFile()));
 }
 MainWin::~MainWin()
 {
 
+}
+
+void MainWin::slotNewFile()
+{
+    //exec new option
+    plainTextEditor->setPlainText("");
+}
+
+void MainWin::slotOpenFile()
+{
+    //exec open fuction
+    actionsInstance = new Actions; //action define
+    qDebug("Openning File.....");
+    QString urlHomePath =  QDir::homePath(); //Home Folder
+    //Open File Dialog
+    QString filePath;
+    filePath = QFileDialog::getOpenFileName(this,"Open Text File:",urlHomePath,"TXT Files(*.txt);;All Files(*.*)");
+    //call open action
+    if (filePath !="" || QFile::exists(filePath) ){
+        QString strPlainData = actionsInstance->actionOenFile(filePath,"utf-8");
+        plainTextEditor->setPlainText(strPlainData);
+        //change title
+        QFileInfo fileInfo(filePath);
+        QString fileName(fileInfo.fileName());
+        this->setWindowTitle(fileName);
+        strFileName = fileName;
+    }
+    else{
+        //cancel open file
+        qDebug("Open File Canceled!");
+        this->setWindowTitle("CutePad");
+    }
+}
+
+void MainWin::slotSaveFile()
+{
+    //exec save function
+    actionsInstance = new Actions;
+    //define variables
+    if (actionsInstance->actionSaveFile("strSFileName","strSFileCodec")){
+        qDebug("File Saved!");
+    }
 }
