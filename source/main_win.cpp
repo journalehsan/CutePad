@@ -2,9 +2,7 @@
 //Define Actions ad a instance
 Actions *actionsInstance;
 //Global Variables
-QString strFileName; //for title anme
-QString urlGlobalFilePath;
-//
+//QString urlGlobalFilePath;
 MainWin::MainWin(QMainWindow *parent)
 : QMainWindow(parent){
     //setup windows widget
@@ -47,7 +45,7 @@ MainWin::MainWin(QMainWindow *parent)
     this->addToolBar(mainToolBar);
     //Tabs
     this->setDocumentMode(true);
-    //connect actions to Actios Class's Functions
+    //connect actions to Actions Class's Functions
     QObject::connect(actionNewFile, SIGNAL(triggered(bool)), this, SLOT(slotNewFile()));
     QObject::connect(actionOpenFile, SIGNAL(triggered(bool)), this, SLOT(slotOpenFile()));
     QObject::connect(actionSaveFile, SIGNAL(triggered(bool)), this, SLOT(slotSaveFile()));

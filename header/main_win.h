@@ -14,6 +14,7 @@ public:
     MainWin(QMainWindow *parent = 0);
     ~MainWin();
 private:
+    QString strFileName; //for title name
     //TextBox
     QPlainTextEdit *plainTextEditor;
     //Layouts & Toolbar
