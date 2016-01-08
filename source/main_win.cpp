@@ -61,6 +61,7 @@ void MainWin::slotNewFile()
 {
     //exec new option
     plainTextEditor->setPlainText("");
+    plainTextEditor->setPlainText("New");
 }
 
 void MainWin::slotOpenFile()
