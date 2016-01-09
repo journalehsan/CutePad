@@ -13,7 +13,7 @@ find_package(Qt5Declarative)
 include_directories(${Qt5Widgets_INCLUDES})
 add_definitions(${Qt5Widgets_DEFINITIONS})
 
-# Tell CMake to create the helloworld executable
+# Tell CMake to create the CutePad executable
 aux_source_directory(. SRC_LIST)
 set(HEADER_FILES header/actions.h header/main_win.h header/main_menu.h)
 set(INCLUDE_DIR ./source/ ./header/)

@@ -84,7 +84,7 @@ void MainWin::slotOpenFile()
     else{
         //cancel open file
         qDebug("Open File Canceled!");
-        this->setWindowTitle("CutePad");
+        this->setWindowTitle(qApp->applicationName());
     }
 }
 
