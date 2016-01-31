@@ -30,6 +30,18 @@ MainWin::MainWin(QMainWindow *parent)
     actionSaveFile->setText("&Save");
     actionSaveFile->setIcon(QIcon::fromTheme("document-save"));
     menuFile->addAction(actionSaveFile);
+    //close action
+    actionClose = new QAction(this);
+    actionClose->setText("&Close");
+    actionClose->setIcon(QIcon::fromTheme("document-close"));
+    menuFile->addAction(actionClose);
+
+    //exit action
+    menuFile->addSeparator();
+    actionQuitApp = new QAction(this);
+    actionQuitApp->setText("&Exit");
+    actionQuitApp->setIcon(QIcon::fromTheme("window-close"));
+    menuFile->addAction(actionQuitApp);
 
     //Text Editor for plain text
     plainTextEditor = new QPlainTextEdit(this);
@@ -49,10 +61,12 @@ MainWin::MainWin(QMainWindow *parent)
     QObject::connect(actionNewFile, SIGNAL(triggered(bool)), this, SLOT(slotNewFile()));
     QObject::connect(actionOpenFile, SIGNAL(triggered(bool)), this, SLOT(slotOpenFile()));
     QObject::connect(actionSaveFile, SIGNAL(triggered(bool)), this, SLOT(slotSaveFile()));
+    QObject::connect(actionClose, SIGNAL(triggered(bool)), this, SLOT(slotCloseFile()));
+    QObject::connect(actionQuitApp, SIGNAL(triggered(bool)), this, SLOT(slotQuitApp()));
 }
 MainWin::~MainWin()
 {
-
+ qDebug("main win");
 }
 
 void MainWin::slotNewFile()
@@ -96,4 +110,19 @@ void MainWin::slotSaveFile()
     if (actionsInstance->actionSaveFile("strSFileName","strSFileCodec")){
         qDebug("File Saved!");
     }
+}
+
+void MainWin::slotCloseFile() {
+    qDebug("close");
+    this->close();
+   // qApp->quit();
+}
+
+QMenu *MainWin::createPopupMenu() {
+    return QMainWindow::createPopupMenu();
+}
+
+void MainWin::slotQuitApp() {
+    qDebug("Quit");
+    qApp->quit();
 }

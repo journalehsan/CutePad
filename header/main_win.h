@@ -14,7 +14,7 @@ public:
     MainWin(QMainWindow *parent = 0);
     ~MainWin();
 private:
-    QString strFileName; //for title name
+    //QString strFileName; //for title name
     //TextBox
     QPlainTextEdit *plainTextEditor;
     //Layouts & Toolbar
@@ -24,10 +24,16 @@ private:
     QAction *actionNewFile;
     QAction *actionSaveFile;
     QAction *actionQuitApp;
-    QAction *actionCloseFile;
+    QAction *actionClose;
+public:
+    virtual QMenu *createPopupMenu();
+
+
 private slots:
      void slotNewFile();
      void slotOpenFile();
      void slotSaveFile();
+     void slotCloseFile();
+    void slotQuitApp();
 };
 #endif //MAIN_WIN_H
